@@ -2,6 +2,8 @@ package com.kliner.Euterpa3;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -268,6 +270,8 @@ public class EuterpaClient {
 	       
 	        id3v2Tag.setTitle(song);
 	        
+	        
+	        
 	      //Before saving anything, check if there is a song that already has that name.
 	        
 
@@ -366,7 +370,7 @@ public class EuterpaClient {
 	}
 	
 	// LATEST WORKING EDIT FUNCTION
-	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String artist, String director,   
+	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
 			 String year, String company, boolean trimLeadingNums, boolean addTrackNums)
 	{
 		try
@@ -378,16 +382,9 @@ public class EuterpaClient {
 	            byte[] imageData = id3v2Tag.getAlbumImage();
 	            if (imageData != null) {
 					String mimeType = id3v2Tag.getAlbumImageMimeType();
-					//System.out.println("Mime type: " + mimeType);
-					// Write image to file - can determine appropriate file extension from the mime type
-					//RandomAccessFile file = new RandomAccessFile("album-artwork", "rw");
-					//file.write(imageData);
-					//file.close();
 	            }
 	        }
-	        
-	       
-	        
+
 	        ID3v2 id3v2Tag;
 	        
 	        if (mp3file.hasId3v2Tag()) {
@@ -405,7 +402,7 @@ public class EuterpaClient {
 	        if(artist.length() > 0)
 	        {
 		        id3v2Tag.setArtist(artist);
-			     //   id3v2Tag.setAlbum(getCurrentFolder(dir)); this doesn't work : (
+			    id3v2Tag.setAlbum(albumName);
 			    id3v2Tag.setAlbumArtist(artist);
 	        }
 
@@ -529,9 +526,9 @@ public class EuterpaClient {
 	{
 		String folder = "";
 		
-		int index = dir.lastIndexOf("//");
+		Path path = Paths.get(dir);
 		
-		folder = dir.substring(index, dir.length());
+		folder = path.getFileName().toString();
 		
 		return folder;
 	}
@@ -540,6 +537,8 @@ public class EuterpaClient {
 	public static void editPlaylist(String path, String strToOmit, String artist, String director,
 			String year, String company, boolean trimLeadingNums, boolean addTrackNums)
 	{
+		String album = getCurrentFolder(path);
+		
 		File dir = new File(path);
 		  File[] files = dir.listFiles();
 		  
@@ -562,15 +561,13 @@ public class EuterpaClient {
 			//  System.out.print("ABORT");
 		  }
 		  
-		  
-		  
 		  for(int i = 0; i < files.length; i++)
 		  {
 			  String name = files[i].getName();
 			  
 			  if(name.contains(strToOmit))
 			  {
-				  setSongProperties(name, path, strToOmit, i+1, artist, director, 
+				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
 						  year, company, trimLeadingNums, addTrackNums);
 			  }
 			  else
