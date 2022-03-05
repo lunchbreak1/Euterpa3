@@ -21,7 +21,7 @@ public class CommandPrompt {
 	static void RunCommand(String command) throws Exception
 	{
 		ProcessBuilder builder = new ProcessBuilder(
-	            "cmd.exe", "/c", "cd \"C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s\" && " + command);
+	            "cmd.exe", "/c", "cd " + Globals.MUSIC_LIBRARY_PATH + " && " + command);
 	        builder.redirectErrorStream(true);
 	        Process p = builder.start();
 	        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));

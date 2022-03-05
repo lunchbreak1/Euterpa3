@@ -88,7 +88,7 @@ public class EuterpaClient {
 	//		CommandPrompt.RunCommand(command);
 	//		System.out.println("command: " + command);
 			ProcessBuilder builder = new ProcessBuilder(
-		            "cmd.exe", "/c", "cd \"C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s\" && " + command);
+		            "cmd.exe", "/c", "cd " + Globals.MUSIC_LIBRARY_PATH + " && " + command);
 
 		        builder.redirectErrorStream(true);
 		        Process p = builder.start();
@@ -225,7 +225,7 @@ public class EuterpaClient {
 	{
 		try
 		{
-			Mp3File mp3file = new Mp3File("MP3s\\temp\\" + song + ".mp3");
+			Mp3File mp3file = new Mp3File(Globals.MUSIC_LIBRARY_PATH + "\\temp\\" + song + ".mp3");
 
 	        if (mp3file.hasId3v2Tag()) {
 	        	ID3v2 id3v2Tag = mp3file.getId3v2Tag();
@@ -278,8 +278,8 @@ public class EuterpaClient {
 	        
 	        
 	        // mp3file.save("MP3s\\" + album + "\\" + song + ".mp3");
-	        SaveSongAs(mp3file,  "MP3s\\" + album + "\\" + song);
-	        SetSortCode("MP3s\\" + album + "\\" + song + ".mp3", sortCode);
+	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
+	        SetSortCode(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", sortCode);
 	        
 	        CommandPrompt.RunCommand("del temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
@@ -375,9 +375,13 @@ public class EuterpaClient {
 	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
 			 String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
+		String tempDir = dir + "\\temp\\";
+
 		try
-		{			
+		{	
+			System.out.println("Changing file: " + dir + "\\" + song);
 			Mp3File mp3file = new Mp3File(dir + "\\" + song);
+
 
 	        if (mp3file.hasId3v2Tag()) {
 	        	ID3v2 id3v2Tag = mp3file.getId3v2Tag();
@@ -451,7 +455,7 @@ public class EuterpaClient {
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
 	        	SetSortCode(dir + "\\" + newTrackName, sortCode);
-	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(song), dir);
+	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
 	        else
 	        {
@@ -471,15 +475,16 @@ public class EuterpaClient {
 				
 				//newTrackName = ReplaceHourlySongs(newTrackName);
 	        	
-	        	CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(dir + "\\temp\\"));
+	        	CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(tempDir));
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
-	        	mp3file.save(dir + "\\temp\\" + newTrackName);
+	        	mp3file.save(tempDir + newTrackName);
 	        	
-	        	String copyCommand = "xcopy " + StringFormatter.SurroundWithQuotes(dir + "\\temp\\" + newTrackName) + " " + StringFormatter.SurroundWithQuotes(dir);
-	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(song), dir);
+	        	String copyCommand = "xcopy " + StringFormatter.SurroundWithQuotes(tempDir + newTrackName) + " " + StringFormatter.SurroundWithQuotes(dir);
+	        	System.out.println("Here's the copy command: " + copyCommand);
+	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(dir + "\\" + song), dir);
 	        	CommandPrompt.RunCommand(copyCommand, dir);
-	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(newTrackName), dir + "\\temp\\");
-	        	CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "\\temp\\"));
+	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(tempDir + "\\" + newTrackName), tempDir);
+	        	CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(tempDir));
 	        }
 	        if (mp3file.hasId3v2Tag()) {
 
@@ -572,7 +577,12 @@ public class EuterpaClient {
 				  
 			  }
 			  
-			  
+			  try {
+				CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "//temp"), Globals.MUSIC_LIBRARY_PATH);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Couldn't remove the temp directory");
+			} 
 		  }
 	}
 	

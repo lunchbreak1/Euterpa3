@@ -25,7 +25,7 @@ public class EuterpaFrame extends JFrame {
 	    this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	    
 	    JTabbedPane tp=new JTabbedPane();  
-	    tp.setBounds(0,0, 800, 900);  
+	    tp.setBounds(0,0, 800, 950);  
 	    tp.add("Create a Playlist",createPanel);  
 	    tp.add("Edit a Playlist",editPanel);  
 	    tp.add("Delete a Playlist",deletePanel); 
