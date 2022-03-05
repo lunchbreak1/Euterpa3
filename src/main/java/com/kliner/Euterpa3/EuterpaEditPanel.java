@@ -142,10 +142,22 @@ import javax.swing.JFileChooser;
 		    yearVal.setBounds(200, 500, 400, 35);
 		    yearVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(yearVal);
+		    
+		    sortCodeLbl = new JLabel("Sort Code");
+		    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
+		    sortCodeLbl.setBounds(80, 700, 120, 40);
+		    sortCodeLbl.setForeground(Color.white); 
+		    add(sortCodeLbl);
+		    
+		    sortCodeVal = new JTextField();
+		    sortCodeVal.setBounds(200, 700, 400, 35);
+		    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
+		    add(sortCodeVal);
+
 
 		    submit = new JButton("Edit Playlist"); 
 		    submit.addActionListener(this); 
-		    submit.setBounds(300, 660, 175, 35);
+		    submit.setBounds(300, 750, 175, 35);
 		    add(submit);
 		} 
 		

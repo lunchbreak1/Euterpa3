@@ -184,7 +184,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 
 	    submit = new JButton("Create Playlist"); 
 	    submit.addActionListener(this); 
-	    submit.setBounds(300, 820, 175, 35);
+	    submit.setBounds(300, 800, 175, 35);
 	    add(submit);
 	    
 	    
