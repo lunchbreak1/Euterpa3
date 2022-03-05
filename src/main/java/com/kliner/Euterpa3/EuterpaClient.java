@@ -58,7 +58,7 @@ public class EuterpaClient {
 	
 	//LATEST
 	public static void edit(String directory, String omitString, 
-			String artist, String director, String company, String year, boolean trimLeadingNums, boolean addTrackNums)
+			String artist, String director, String company, String year, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		//read folder for mp3 files
 		//get a list of timestamps
@@ -66,7 +66,7 @@ public class EuterpaClient {
 		//return cut up mp3 files
 		try
 		{
-			editPlaylist(directory, omitString, artist, director, company, year, trimLeadingNums, addTrackNums);
+			editPlaylist(directory, omitString, artist, director, company, year, trimLeadingNums, addTrackNums, sortCode);
 			
 			//loop through every file in the directory and run setProperties on each mp3 file
 
@@ -373,7 +373,7 @@ public class EuterpaClient {
 	
 	// LATEST WORKING EDIT FUNCTION
 	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
-			 String year, String company, boolean trimLeadingNums, boolean addTrackNums)
+			 String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		try
 		{			
@@ -450,6 +450,7 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
+	        	SetSortCode(dir + "\\" + newTrackName, sortCode);
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(song), dir);
 	        }
 	        else
@@ -532,7 +533,7 @@ public class EuterpaClient {
 	
 	//LATEST VERSION
 	public static void editPlaylist(String path, String strToOmit, String artist, String director,
-			String year, String company, boolean trimLeadingNums, boolean addTrackNums)
+			String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		String album = getCurrentFolder(path);
 		
@@ -564,7 +565,7 @@ public class EuterpaClient {
 			  if(name.contains(strToOmit))
 			  {
 				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
-						  year, company, trimLeadingNums, addTrackNums);
+						  year, company, trimLeadingNums, addTrackNums, sortCode);
 			  }
 			  else
 			  {

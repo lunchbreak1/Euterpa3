@@ -220,7 +220,8 @@ import javax.swing.JFileChooser;
 		        	artistVal.getText(),
 		        	companyVal.getText(), yearVal.getText(),
 		        	removeNumbers.isSelected(),
-		        	addTrackNumbers.isSelected());
+		        	addTrackNumbers.isSelected(),
+		        	sortCodeVal.getText());
 		        }
 		          
 		  } 
