@@ -78,30 +78,7 @@ import javax.swing.JFileChooser;
 		    omitStringVal.setBounds(250, 150, 345, 35);
 		    omitStringVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(omitStringVal);
-		  		    
-//		    artVal = new JTextField();
-//		    artVal.setBounds(100, 200, 500, 35);
-//		    artVal.setFont(new Font("Arial", Font.PLAIN, 24));
-//		    add(artVal);
-//		  
-//		   // JFileChooser fileSelect = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa-2\\MP3s"); 
-//		    
-//		    selectArt = new JButton("Select Art"); 
-//		    selectArt.addActionListener(this); 
-//		    selectArt.setBounds(620, 200, 100, 35);
-//		    add(selectArt);
-//		    
-//		    seriesLbl = new JLabel("Series");
-//		    seriesLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-//		    seriesLbl.setBounds(100, 250, 100, 40);
-//		    seriesLbl.setForeground(Color.white);
-//		    add(seriesLbl);
-//		    
-//		    seriesVal = new JTextField();
-//		    seriesVal.setBounds(200, 250, 400, 35);
-//		    seriesVal.setFont(new Font("Arial", Font.PLAIN, 24));
-//		    add(seriesVal);
-		    
+
 		    artistLbl = new JLabel("Director");
 		    artistLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 		    artistLbl.setBounds(100, 300, 120, 40);
@@ -165,10 +142,22 @@ import javax.swing.JFileChooser;
 		    yearVal.setBounds(200, 500, 400, 35);
 		    yearVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(yearVal);
+		    
+		    sortCodeLbl = new JLabel("Sort Code");
+		    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
+		    sortCodeLbl.setBounds(80, 700, 120, 40);
+		    sortCodeLbl.setForeground(Color.white); 
+		    add(sortCodeLbl);
+		    
+		    sortCodeVal = new JTextField();
+		    sortCodeVal.setBounds(200, 700, 400, 35);
+		    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
+		    add(sortCodeVal);
+
 
 		    submit = new JButton("Edit Playlist"); 
 		    submit.addActionListener(this); 
-		    submit.setBounds(300, 660, 175, 35);
+		    submit.setBounds(300, 750, 175, 35);
 		    add(submit);
 		} 
 		
@@ -231,7 +220,8 @@ import javax.swing.JFileChooser;
 		        	artistVal.getText(),
 		        	companyVal.getText(), yearVal.getText(),
 		        	removeNumbers.isSelected(),
-		        	addTrackNumbers.isSelected());
+		        	addTrackNumbers.isSelected(),
+		        	sortCodeVal.getText());
 		        }
 		          
 		  } 

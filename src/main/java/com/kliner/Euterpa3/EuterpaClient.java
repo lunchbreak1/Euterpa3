@@ -2,6 +2,8 @@ package com.kliner.Euterpa3;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -56,7 +58,7 @@ public class EuterpaClient {
 	
 	//LATEST
 	public static void edit(String directory, String omitString, 
-			String artist, String director, String company, String year, boolean trimLeadingNums, boolean addTrackNums)
+			String artist, String director, String company, String year, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		//read folder for mp3 files
 		//get a list of timestamps
@@ -64,7 +66,7 @@ public class EuterpaClient {
 		//return cut up mp3 files
 		try
 		{
-			editPlaylist(directory, omitString, artist, director, company, year, trimLeadingNums, addTrackNums);
+			editPlaylist(directory, omitString, artist, director, company, year, trimLeadingNums, addTrackNums, sortCode);
 			
 			//loop through every file in the directory and run setProperties on each mp3 file
 
@@ -268,6 +270,8 @@ public class EuterpaClient {
 	       
 	        id3v2Tag.setTitle(song);
 	        
+	        
+	        
 	      //Before saving anything, check if there is a song that already has that name.
 	        
 
@@ -275,6 +279,8 @@ public class EuterpaClient {
 	        
 	        // mp3file.save("MP3s\\" + album + "\\" + song + ".mp3");
 	        SaveSongAs(mp3file,  "MP3s\\" + album + "\\" + song);
+	        SetSortCode("MP3s\\" + album + "\\" + song + ".mp3", sortCode);
+	        
 	        CommandPrompt.RunCommand("del temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
 	        	
@@ -366,8 +372,8 @@ public class EuterpaClient {
 	}
 	
 	// LATEST WORKING EDIT FUNCTION
-	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String artist, String director,   
-			 String year, String company, boolean trimLeadingNums, boolean addTrackNums)
+	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
+			 String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		try
 		{			
@@ -378,16 +384,9 @@ public class EuterpaClient {
 	            byte[] imageData = id3v2Tag.getAlbumImage();
 	            if (imageData != null) {
 					String mimeType = id3v2Tag.getAlbumImageMimeType();
-					//System.out.println("Mime type: " + mimeType);
-					// Write image to file - can determine appropriate file extension from the mime type
-					//RandomAccessFile file = new RandomAccessFile("album-artwork", "rw");
-					//file.write(imageData);
-					//file.close();
 	            }
 	        }
-	        
-	       
-	        
+
 	        ID3v2 id3v2Tag;
 	        
 	        if (mp3file.hasId3v2Tag()) {
@@ -405,7 +404,7 @@ public class EuterpaClient {
 	        if(artist.length() > 0)
 	        {
 		        id3v2Tag.setArtist(artist);
-			     //   id3v2Tag.setAlbum(getCurrentFolder(dir)); this doesn't work : (
+			    id3v2Tag.setAlbum(albumName);
 			    id3v2Tag.setAlbumArtist(artist);
 	        }
 
@@ -451,6 +450,7 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
+	        	SetSortCode(dir + "\\" + newTrackName, sortCode);
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(song), dir);
 	        }
 	        else
@@ -481,11 +481,6 @@ public class EuterpaClient {
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(newTrackName), dir + "\\temp\\");
 	        	CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "\\temp\\"));
 	        }
-	        
-	        
-	        
-	        
-	        
 	        if (mp3file.hasId3v2Tag()) {
 
 	        } 
@@ -529,17 +524,19 @@ public class EuterpaClient {
 	{
 		String folder = "";
 		
-		int index = dir.lastIndexOf("//");
+		Path path = Paths.get(dir);
 		
-		folder = dir.substring(index, dir.length());
+		folder = path.getFileName().toString();
 		
 		return folder;
 	}
 	
 	//LATEST VERSION
 	public static void editPlaylist(String path, String strToOmit, String artist, String director,
-			String year, String company, boolean trimLeadingNums, boolean addTrackNums)
+			String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
+		String album = getCurrentFolder(path);
+		
 		File dir = new File(path);
 		  File[] files = dir.listFiles();
 		  
@@ -555,14 +552,11 @@ public class EuterpaClient {
 		    for (File file : files) 
 		    {
 		    	Date date = new Date(file.lastModified());
-		   //   System.out.println(file.getName() + " modified at: " + date);
 		    }
 		  } 
 		  else {
-			//  System.out.print("ABORT");
+
 		  }
-		  
-		  
 		  
 		  for(int i = 0; i < files.length; i++)
 		  {
@@ -570,8 +564,8 @@ public class EuterpaClient {
 			  
 			  if(name.contains(strToOmit))
 			  {
-				  setSongProperties(name, path, strToOmit, i+1, artist, director, 
-						  year, company, trimLeadingNums, addTrackNums);
+				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
+						  year, company, trimLeadingNums, addTrackNums, sortCode);
 			  }
 			  else
 			  {
@@ -580,6 +574,11 @@ public class EuterpaClient {
 			  
 			  
 		  }
+	}
+	
+	public static void SetSortCode(String pathToFile, String sortCode)
+	{
+		FrameWriter.SetSortCode(pathToFile, sortCode);
 	}
 	
 	public static void delete(String path) throws Exception

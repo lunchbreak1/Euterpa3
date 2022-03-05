@@ -171,19 +171,20 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    yearVal.setFont(new Font("Arial", Font.PLAIN, 24));
 	    add(yearVal);
 	    
-//	    sortCodeLbl = new JLabel("Sort Code");
-//	    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-//	    sortCodeLbl.setBounds(80, 750, 120, 40);
-//	    add(sortCodeLbl);
-//	    
-//	    sortCodeVal = new JTextField();
-//	    sortCodeVal.setBounds(200, 750, 400, 35);
-//	    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
-//	    add(sortCodeVal);
+	    sortCodeLbl = new JLabel("Sort Code");
+	    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
+	    sortCodeLbl.setBounds(80, 750, 120, 40);
+	    sortCodeLbl.setForeground(Color.white); 
+	    add(sortCodeLbl);
+	    
+	    sortCodeVal = new JTextField();
+	    sortCodeVal.setBounds(200, 750, 400, 35);
+	    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
+	    add(sortCodeVal);
 
 	    submit = new JButton("Create Playlist"); 
 	    submit.addActionListener(this); 
-	    submit.setBounds(300, 750, 175, 35);
+	    submit.setBounds(300, 800, 175, 35);
 	    add(submit);
 	    
 	    
@@ -284,7 +285,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    	        	timestampList, "", "", 
 	    	        	directorVal.getText(), artistVal.getText(),
 	    	        	"", 
-	    	        	companyVal.getText(), yearVal.getText(), "",
+	    	        	companyVal.getText(), yearVal.getText(), sortCodeVal.getText(),
 	    	        	removeChars.getText(), trimChars.getText(),
 	    	        	removeNumbers.isSelected());
 	            
