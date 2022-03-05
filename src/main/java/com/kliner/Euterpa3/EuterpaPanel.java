@@ -174,12 +174,12 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    sortCodeLbl = new JLabel("Sort Code");
 	    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 	    sortCodeLbl.setBounds(80, 750, 120, 40);
+	    sortCodeLbl.setForeground(Color.white); 
 	    add(sortCodeLbl);
 	    
 	    sortCodeVal = new JTextField();
 	    sortCodeVal.setBounds(200, 750, 400, 35);
 	    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
-	    sortCodeVal.setForeground(Color.white); 
 	    add(sortCodeVal);
 
 	    submit = new JButton("Create Playlist"); 

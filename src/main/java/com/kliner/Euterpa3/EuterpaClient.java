@@ -279,6 +279,8 @@ public class EuterpaClient {
 	        
 	        // mp3file.save("MP3s\\" + album + "\\" + song + ".mp3");
 	        SaveSongAs(mp3file,  "MP3s\\" + album + "\\" + song);
+	        SetSortCode("MP3s\\" + album + "\\" + song + ".mp3", sortCode);
+	        
 	        CommandPrompt.RunCommand("del temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
 	        	
@@ -478,11 +480,6 @@ public class EuterpaClient {
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(newTrackName), dir + "\\temp\\");
 	        	CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "\\temp\\"));
 	        }
-	        
-	        
-	        
-	        
-	        
 	        if (mp3file.hasId3v2Tag()) {
 
 	        } 
@@ -554,11 +551,10 @@ public class EuterpaClient {
 		    for (File file : files) 
 		    {
 		    	Date date = new Date(file.lastModified());
-		   //   System.out.println(file.getName() + " modified at: " + date);
 		    }
 		  } 
 		  else {
-			//  System.out.print("ABORT");
+
 		  }
 		  
 		  for(int i = 0; i < files.length; i++)
@@ -577,6 +573,11 @@ public class EuterpaClient {
 			  
 			  
 		  }
+	}
+	
+	public static void SetSortCode(String pathToFile, String sortCode)
+	{
+		FrameWriter.SetSortCode(pathToFile, sortCode);
 	}
 	
 	public static void delete(String path) throws Exception
