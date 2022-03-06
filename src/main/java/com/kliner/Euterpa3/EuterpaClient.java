@@ -452,7 +452,7 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
-	        	SetSortCode(dir + "\\" + newTrackName, sortCode);
+	        	SetSortCode(dir + newTrackName, sortCode);
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
 	        else
@@ -476,6 +476,7 @@ public class EuterpaClient {
 	        	CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(tempDir));
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(tempDir + newTrackName);
+	        	SetSortCode(tempDir + newTrackName, sortCode);
 	        	
 	        	String copyCommand = "xcopy " + StringFormatter.SurroundWithQuotes(tempDir + newTrackName) + " " + StringFormatter.SurroundWithQuotes(dir);
 	        	System.out.println("Here's the copy command: " + copyCommand);
@@ -586,7 +587,10 @@ public class EuterpaClient {
 	
 	public static void SetSortCode(String pathToFile, String sortCode)
 	{
-		FrameWriter.SetSortCode(pathToFile, sortCode);
+		if(sortCode.length() > 0)
+		{
+			FrameWriter.SetSortCode(pathToFile, sortCode);
+		}
 	}
 	
 	public static void delete(String path) throws Exception
