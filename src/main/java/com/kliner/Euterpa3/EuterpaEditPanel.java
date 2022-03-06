@@ -101,7 +101,7 @@ import javax.swing.JFileChooser;
 		    directorVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(directorVal);
 		    
-		    removeNumsLbl = new JLabel("Remove leading numbers?");
+		    /*removeNumsLbl = new JLabel("Remove leading numbers?");
 		    removeNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 		    removeNumsLbl.setBounds(100, 550, 500, 40);
 		    removeNumsLbl.setForeground(Color.white);
@@ -109,7 +109,7 @@ import javax.swing.JFileChooser;
 		    
 		    removeNumbers = new JCheckBox();
 		    removeNumbers.setBounds(590, 560, 25, 25);
-		    add(removeNumbers);
+		    add(removeNumbers);*/
 		    
 		    addTrackNumsLbl = new JLabel("Add track numbers?");
 		    addTrackNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -197,7 +197,7 @@ import javax.swing.JFileChooser;
 		        	artistVal.getText(),
 		        	companyVal.getText(), yearVal.getText(),
 		        	removeNumbers.isSelected(),
-		        	addTrackNumbers.isSelected(),
+		        	true,
 		        	sortCodeVal.getText());
 		        }
 		          

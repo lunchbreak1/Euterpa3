@@ -561,32 +561,24 @@ public class EuterpaClient {
 		    	Date date = new Date(file.lastModified());
 		    }
 		  } 
-		  else {
 
-		  }
-		  
 		  for(int i = 0; i < files.length; i++)
 		  {
 			  String name = files[i].getName();
-			  
-			  if(name.contains(strToOmit))
-			  {
+
 				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
 						  year, company, trimLeadingNums, addTrackNums, sortCode);
-			  }
-			  else
-			  {
-				  
-			  }
-			  
-			  try {
-				CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "//temp"), Globals.MUSIC_LIBRARY_PATH);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Couldn't remove the temp directory");
-			} 
 		  }
-	}
+		  
+		  try {
+				CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "//temp"), Globals.MUSIC_LIBRARY_PATH);
+			  } catch (Exception e) 
+		  		{
+				  // TODO Auto-generated catch block
+				  System.out.println("Couldn't remove the temp directory");
+			    } 
+	 }
+	
 	
 	public static void SetSortCode(String pathToFile, String sortCode)
 	{
