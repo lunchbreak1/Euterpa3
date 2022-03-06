@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 public class EuterpaDeletePanel extends JPanel implements ActionListener  {
 	
-	String MP3folder = "C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa-2\\MP3s\\";
+	String MP3folder = Globals.MUSIC_LIBRARY_PATH;
 	JLabel titleLabel, pageLbl, omitStringLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl;
 	JTextField ostValue, omitStringVal, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, sortCodeVal;
 	JTextArea timestamps;
@@ -174,7 +174,7 @@ public class EuterpaDeletePanel extends JPanel implements ActionListener  {
 	        if (com.equals("Select Playlist")) 
 	        { 
 	            // create an object of JFileChooser class 
-	            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s"); 
+	            JFileChooser fileChooser = new JFileChooser(Globals.MUSIC_LIBRARY_PATH); 
 	  
 	            // set the selection mode to directories only 
 	            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -194,7 +194,7 @@ public class EuterpaDeletePanel extends JPanel implements ActionListener  {
 	            } 
 	        }
 	        
-	        if (com.equals("Select Art")) 
+	/*        if (com.equals("Select Art")) 
 	        { 
 	            // create an object of JFileChooser class 
 	            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\Art"); 
@@ -215,7 +215,7 @@ public class EuterpaDeletePanel extends JPanel implements ActionListener  {
 	            {
 	              //  l.setText("the user cancelled the operation"); 
 	            } 
-	        }
+	        } */
 	        
 	        if (com.equals("Delete Playlist")) 
 	        {

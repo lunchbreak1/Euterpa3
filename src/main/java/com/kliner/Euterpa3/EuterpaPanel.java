@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileSystemView;
 public class EuterpaPanel extends JPanel implements ActionListener
 {
 	//String MP3folder = "D:\\Music\\";
-	String MP3folder = "C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s\\";
+	String MP3folder = Globals.MUSIC_LIBRARY_PATH;
 	JLabel titleLabel, pageLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeCharsLbl, trimCharsLbl, removeNumsLbl;
 	JTextField ostValue, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, sortCodeVal, removeChars, trimChars;
 	JTextArea timestamps;
@@ -56,7 +56,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    pageLbl.setForeground(Color.white);
 	    add(pageLbl);
 	    
-	    ostValue = new JTextField();
+	    ostValue = new JTextField(Globals.MUSIC_LIBRARY_PATH);
 	    ostValue.setBounds(100, 90, 500, 35);
 	    ostValue.setFont(new Font("Arial", Font.PLAIN, 24));
 	    add(ostValue);
@@ -186,29 +186,6 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    submit.addActionListener(this); 
 	    submit.setBounds(300, 800, 175, 35);
 	    add(submit);
-	    
-	    
-	 // Open the save dialog 
-	// j.showSaveDialog(null); 
-	   // add(j);
-	    
-	    /*
-	     * JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory()); 
-  
-            // set the selection mode to directories only 
-            j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
-  
-            // invoke the showsOpenDialog function to show the save dialog 
-            int r = j.showOpenDialog(null); 
-  
-            if (r == JFileChooser.APPROVE_OPTION) { 
-                // set the label to the path of the selected directory 
-                l.setText(j.getSelectedFile().getAbsolutePath()); 
-            } 
-            // if the user cancelled the operation 
-            else
-                l.setText("the user cancelled the operation"); 41
-	     */
 	} 
 	
 	 public void actionPerformed(ActionEvent evt) 
@@ -219,7 +196,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	        if (com.equals("Select OST")) 
 	        { 
 	            // create an object of JFileChooser class 
-	            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s"); 
+	            JFileChooser fileChooser = new JFileChooser(MP3folder); 
 	  
 	            // set the selection mode to directories only 
 	            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -238,48 +215,13 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	              //  l.setText("the user cancelled the operation"); 
 	            } 
 	        }
-	        
-	        if (com.equals("Select Art")) 
-	        { 
-	            // create an object of JFileChooser class 
-	            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\Art"); 
-	  
-	            // set the selection mode to directories only 
-	            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-	  
-	            // invoke the showsSaveDialog function to show the save dialog 
-	            int r = fileChooser.showSaveDialog(null); 
-	  
-	            if (r == JFileChooser.APPROVE_OPTION) 
-	            { 
-	                // set the label to the path of the selected directory 
-	                artVal.setText(fileChooser.getSelectedFile().getAbsolutePath()); 
-	            } 
-	            // if the user cancelled the operation 
-	            else
-	            {
-	              //  l.setText("the user cancelled the operation"); 
-	            } 
-	        }
-	        
+
 	        if (com.equals("Create Playlist")) 
 	        {
 	        	GetOST(ostValue.getText());
 	        	
 	        	String s[] = timestamps.getText().split("\\r?\\n");
 	            ArrayList<String>timestampList = new ArrayList<String>(Arrays.asList(s));
-	        	
-	        /*	EuterpaClient euterpa = new EuterpaClient(ost, dir, 
-	        	timestampList, artVal.getText(), seriesVal.getText(), 
-	        	artistVal.getText(),
-	        	directorVal.getText(), mediumVal.getText(), 
-	        	companyVal.getText(), yearVal.getText(), sortCodeVal.getText()); */
-	            
-	         /*   EuterpaClient.run(ost, dir, 
-	    	        	timestampList, "", "", 
-	    	        	directorVal.getText(), artistVal.getText(),
-	    	        	"", 
-	    	        	companyVal.getText(), yearVal.getText(), ""); */
 	            
 	            EuterpaClient.run(ost, dir, 
 	    	        	timestampList, "", "", 

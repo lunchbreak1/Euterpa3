@@ -24,7 +24,7 @@ import javax.swing.JFileChooser;
 	public class EuterpaEditPanel extends JPanel implements ActionListener {
 
 		//String MP3folder = "D:\\Music\\";
-		String MP3folder = "C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa-2\\MP3s\\";
+		String MP3folder = Globals.MUSIC_LIBRARY_PATH;
 		JLabel titleLabel, pageLbl, omitStringLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeNumsLbl, addTrackNumsLbl;
 		JTextField ostValue, omitStringVal, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, sortCodeVal;
 		JTextArea timestamps;
@@ -58,7 +58,7 @@ import javax.swing.JFileChooser;
 		    pageLbl.setForeground(Color.white);
 		    add(pageLbl);
 		    
-		    ostValue = new JTextField();
+		    ostValue = new JTextField(Globals.MUSIC_LIBRARY_PATH);
 		    ostValue.setBounds(100, 90, 500, 35);
 		    ostValue.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(ostValue);
@@ -169,7 +169,7 @@ import javax.swing.JFileChooser;
 		        if (com.equals("Select Playlist")) 
 		        { 
 		            // create an object of JFileChooser class 
-		            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\MP3s"); 
+		            JFileChooser fileChooser = new JFileChooser(MP3folder); 
 		  
 		            // set the selection mode to directories only 
 		            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -181,29 +181,6 @@ import javax.swing.JFileChooser;
 		            { 
 		                // set the label to the path of the selected directory 
 		                ostValue.setText(fileChooser.getSelectedFile().getAbsolutePath()); 
-		            } 
-		            // if the user cancelled the operation 
-		            else
-		            {
-		              //  l.setText("the user cancelled the operation"); 
-		            } 
-		        }
-		        
-		        if (com.equals("Select Art")) 
-		        { 
-		            // create an object of JFileChooser class 
-		            JFileChooser fileChooser = new JFileChooser("C:\\Users\\iank1\\OneDrive\\Desktop\\Projects\\Java\\Euterpa3\\Art"); 
-		  
-		            // set the selection mode to directories only 
-		            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		  
-		            // invoke the showsSaveDialog function to show the save dialog 
-		            int r = fileChooser.showSaveDialog(null); 
-		  
-		            if (r == JFileChooser.APPROVE_OPTION) 
-		            { 
-		                // set the label to the path of the selected directory 
-		                artVal.setText(fileChooser.getSelectedFile().getAbsolutePath()); 
 		            } 
 		            // if the user cancelled the operation 
 		            else
