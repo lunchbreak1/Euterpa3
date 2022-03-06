@@ -277,8 +277,9 @@ public class EuterpaClient {
 	      //Before saving anything, check if there is a song that already has that name.
 
 	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
+	        SetYear(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", year);
 	        SetSortCode(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", sortCode);
-	        
+
 	        CommandPrompt.RunCommand("del " + Globals.MUSIC_LIBRARY_PATH + "temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
 	        	
@@ -410,10 +411,10 @@ public class EuterpaClient {
 			    id3v2Tag.setAlbumArtist(artist);
 	        }
 
-	        if(year.length() > 0)
+	       /* if(year.length() > 0)
 	        {
 	        	id3v2Tag.setYear(year);
-	        }
+	        }*/
 	        
 	        String comment = "";
 	        
@@ -452,7 +453,8 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
-	        	SetSortCode(dir + newTrackName, sortCode);
+	        	SetYear(dir + newTrackName, year);
+	        	SetSortCode(dir + newTrackName, sortCode);       	
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
 	        else
@@ -476,6 +478,7 @@ public class EuterpaClient {
 	        	CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(tempDir));
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(tempDir + newTrackName);
+	        	SetYear(tempDir + newTrackName, year);
 	        	SetSortCode(tempDir + newTrackName, sortCode);
 	        	
 	        	String copyCommand = "xcopy " + StringFormatter.SurroundWithQuotes(tempDir + newTrackName) + " " + StringFormatter.SurroundWithQuotes(dir);
@@ -590,6 +593,14 @@ public class EuterpaClient {
 		if(sortCode.length() > 0)
 		{
 			FrameWriter.SetSortCode(pathToFile, sortCode);
+		}
+	}
+	
+	public static void SetYear(String pathToFile, String year)
+	{
+		if(year.length() > 0)
+		{
+			FrameWriter.SetYear(pathToFile, year);
 		}
 	}
 	
