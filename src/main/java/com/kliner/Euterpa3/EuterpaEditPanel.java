@@ -101,7 +101,7 @@ import javax.swing.JFileChooser;
 		    directorVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(directorVal);
 		    
-		    /*removeNumsLbl = new JLabel("Remove leading numbers?");
+		    removeNumsLbl = new JLabel("Remove leading numbers?");
 		    removeNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 		    removeNumsLbl.setBounds(100, 550, 500, 40);
 		    removeNumsLbl.setForeground(Color.white);
@@ -109,9 +109,9 @@ import javax.swing.JFileChooser;
 		    
 		    removeNumbers = new JCheckBox();
 		    removeNumbers.setBounds(590, 560, 25, 25);
-		    add(removeNumbers);*/
+		    add(removeNumbers);
 		    
-		    addTrackNumsLbl = new JLabel("Add track numbers?");
+		    /*addTrackNumsLbl = new JLabel("Add track numbers?");
 		    addTrackNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 		    addTrackNumsLbl.setBounds(100, 610, 500, 40);
 		    addTrackNumsLbl.setForeground(Color.white);
@@ -119,7 +119,7 @@ import javax.swing.JFileChooser;
 		    
 		    addTrackNumbers = new JCheckBox();
 		    addTrackNumbers.setBounds(590, 610, 25, 25);
-		    add(addTrackNumbers);
+		    add(addTrackNumbers);*/
 
 		    companyLbl = new JLabel("Company");
 		    companyLbl.setFont(new Font("Arial", Font.PLAIN, 24));
