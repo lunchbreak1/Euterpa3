@@ -14,14 +14,15 @@ public class CommandPrompt {
 	//builds the ffmpeg command to slice the OST into a single song
 	static String BuildCommand(String ost, String song, String startTime, int length)
 	{
-		return "ffmpeg -ss " + startTime + " -i " + StringFormatter.SurroundWithQuotes(ost) + " -t " + length + " -vcodec copy -acodec copy temp//" + StringFormatter.SurroundWithQuotes(song + ".mp3");
+		return "ffmpeg -ss " + startTime + " -i " + StringFormatter.SurroundWithQuotes(ost) + " -t " + length + " -vcodec copy -acodec copy " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\temp\\" + song + ".mp3");
 	}
 	
 	//runs the ffmpeg command in the MP3s directory
 	static void RunCommand(String command) throws Exception
 	{
+		System.out.print("Time to run " +command);
 		ProcessBuilder builder = new ProcessBuilder(
-	            "cmd.exe", "/c", "cd " + Globals.MUSIC_LIBRARY_PATH + " && " + command);
+	            "cmd.exe", "/c", "cd " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH) + " && " + command);
 	        builder.redirectErrorStream(true);
 	        Process p = builder.start();
 	        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -37,7 +38,7 @@ public class CommandPrompt {
 	//runs the ffmpeg command in a different library
 	static void RunCommand(String command, String dir) throws Exception
 	{
-		System.out.print("Time to run " +command);
+		System.out.print("Time to run " +command +" in " + dir);
 		ProcessBuilder builder = new ProcessBuilder(
 	            "cmd.exe", "/c", "cd " + StringFormatter.SurroundWithQuotes(dir) + " && " + command);
 

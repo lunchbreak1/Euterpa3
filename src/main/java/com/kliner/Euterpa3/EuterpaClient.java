@@ -38,15 +38,17 @@ public class EuterpaClient {
 		//return cut up mp3 files
 		try
 		{
-			String ostLength = GetOSTLength(ost, directory);
-		//	System.out.println("returns: ");
-			CommandPrompt.RunCommand("mkdir temp");
-			CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(ost.replace(".mp3", "")));
+			String ostLength = GetOSTLength(ost, Globals.MUSIC_LIBRARY_PATH);
+			
+			String tempDir = Globals.MUSIC_LIBRARY_PATH + "temp\\";
+			String albumDir = StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + ost.replace(".mp3", ""));
+
+			CommandPrompt.RunCommand("mkdir " + tempDir, Globals.MUSIC_LIBRARY_PATH);
+			CommandPrompt.RunCommand("mkdir " + albumDir, Globals.MUSIC_LIBRARY_PATH);
 			ArrayList<Timestamp> timestamps = LoadTimestamps(tstamps, removeChars, trimChars, removeNums);
 			sliceOST(ost, ostLength, directory, timestamps, artist, director, series, year, company, medium, art, sortCode);
-			CommandPrompt.RunCommand("rmdir temp");
-
-		//	System.out.print("Process complete!");
+			CommandPrompt.RunCommand("rmdir " + tempDir, StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH));
+			System.out.print("Process complete!");
 		}
 		catch(Exception e)
 		{
@@ -121,11 +123,11 @@ public class EuterpaClient {
 		try
 		{
 			//String command = "ffmpeg -i " + StringFormatter.SurroundWithQuotes(ost) + " 2>&1";
-			String command = "ffmpeg -i " + StringFormatter.SurroundWithQuotes(ost);
+			String command = "ffmpeg -i " + StringFormatter.SurroundWithQuotes(dir + ost);
 		//	System.out.print("command: " + command);
 			//CommandPrompt.RunCommand(command);
 			ProcessBuilder builder = new ProcessBuilder(
-		            "cmd.exe", "/c", "cd " + StringFormatter.SurroundWithQuotes(dir) + " && " + command);
+		            "cmd.exe", "/c", "cd " + dir + " && " + command);
 
 		        builder.redirectErrorStream(true);
 		        Process p = builder.start();
@@ -133,7 +135,7 @@ public class EuterpaClient {
 		        String line;
 		        while (true) {
 		            line = r.readLine();
-
+		            System.out.print("Result from GetOSTLength: " + line);
 		            if (line == null) { break; }
 		            if(line.contains("Duration"))
 		            {
@@ -200,12 +202,12 @@ public class EuterpaClient {
 				Timestamp timestamp = timestamps.get(i);
 				Timestamp next = timestamps.get(i + 1);
 				int length = GetLength(timestamp, next);
-				command = CommandPrompt.BuildCommand(ost, timestamp.title, timestamp.beginTime, length);
+				command = CommandPrompt.BuildCommand(Globals.MUSIC_LIBRARY_PATH + ost, timestamp.title, timestamp.beginTime, length);
 				CommandPrompt.RunCommand(command, directory);
 				setSongProperties(timestamp.title, i+1, ost.replace(".mp3", ""), artist, director, series, year, company, medium, art, sortCode);
 			}
 
-				command = CommandPrompt.BuildCommand(ost, 
+				command = CommandPrompt.BuildCommand(Globals.MUSIC_LIBRARY_PATH + ost, 
 		 								  timestamps.get(timestamps.size() - 1).title, 
 		 								  timestamps.get(timestamps.size() - 1).beginTime, 
 		 								GetLength(timestamps.get(timestamps.size() -1).beginTime, ostLength));
@@ -273,15 +275,11 @@ public class EuterpaClient {
 	        
 	        
 	      //Before saving anything, check if there is a song that already has that name.
-	        
 
-	        
-	        
-	        // mp3file.save("MP3s\\" + album + "\\" + song + ".mp3");
 	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
 	        SetSortCode(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", sortCode);
 	        
-	        CommandPrompt.RunCommand("del temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
+	        CommandPrompt.RunCommand("del " + Globals.MUSIC_LIBRARY_PATH + "temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
 	        	
 	        }
@@ -373,7 +371,7 @@ public class EuterpaClient {
 	
 	// LATEST WORKING EDIT FUNCTION
 	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
-			 String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
+			 String company, String year, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		String tempDir = dir + "\\temp\\";
 
@@ -400,7 +398,7 @@ public class EuterpaClient {
 	        	mp3file.setId3v2Tag(id3v2Tag);
 	        }
 
-	        if(addTrackNums)
+	        if(id3v2Tag.getTrack()==null)
 	        {
 	        	id3v2Tag.setTrack("" + trackNumber);
 	        }
