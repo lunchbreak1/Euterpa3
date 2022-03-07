@@ -411,11 +411,6 @@ public class EuterpaClient {
 			    id3v2Tag.setAlbumArtist(artist);
 	        }
 
-	       /* if(year.length() > 0)
-	        {
-	        	id3v2Tag.setYear(year);
-	        }*/
-	        
 	        String comment = "";
 	        
 	        if(company.length() > 0)
@@ -453,8 +448,8 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
-	        	SetYear(dir + newTrackName, year);
-	        	SetSortCode(dir + newTrackName, sortCode);       	
+	        	SetYear(dir + "\\" + newTrackName, year);
+	        	SetSortCode(dir + "\\" + newTrackName, sortCode);       	
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
 	        else
