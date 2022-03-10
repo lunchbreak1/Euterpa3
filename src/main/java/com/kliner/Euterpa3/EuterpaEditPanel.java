@@ -111,15 +111,15 @@ import javax.swing.JFileChooser;
 		    removeNumbers.setBounds(590, 560, 25, 25);
 		    add(removeNumbers);
 		    
-		    /*addTrackNumsLbl = new JLabel("Add track numbers?");
+		    addTrackNumsLbl = new JLabel("Add track numbers and change all tracks?");
 		    addTrackNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-		    addTrackNumsLbl.setBounds(100, 610, 500, 40);
+		    addTrackNumsLbl.setBounds(100, 600, 500, 40);
 		    addTrackNumsLbl.setForeground(Color.white);
 		    add(addTrackNumsLbl);
 		    
 		    addTrackNumbers = new JCheckBox();
 		    addTrackNumbers.setBounds(590, 610, 25, 25);
-		    add(addTrackNumbers);*/
+		    add(addTrackNumbers);
 
 		    companyLbl = new JLabel("Company");
 		    companyLbl.setFont(new Font("Arial", Font.PLAIN, 24));
@@ -197,7 +197,7 @@ import javax.swing.JFileChooser;
 		        	artistVal.getText(),
 		        	companyVal.getText(), yearVal.getText(),
 		        	removeNumbers.isSelected(),
-		        	true,
+		        	addTrackNumbers.isSelected(),
 		        	sortCodeVal.getText());
 		        }
 		          

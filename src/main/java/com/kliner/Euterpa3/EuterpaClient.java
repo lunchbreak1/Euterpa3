@@ -399,7 +399,7 @@ public class EuterpaClient {
 	        	mp3file.setId3v2Tag(id3v2Tag);
 	        }
 
-	        if(id3v2Tag.getTrack()==null)
+	        if(addTrackNums && id3v2Tag.getTrack()==null)
 	        {
 	        	id3v2Tag.setTrack("" + trackNumber);
 	        }
@@ -560,9 +560,11 @@ public class EuterpaClient {
 		  for(int i = 0; i < files.length; i++)
 		  {
 			  String name = files[i].getName();
-
+			  if(name.contains(strToOmit) || addTrackNums)
+			  {
 				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
 						  year, company, trimLeadingNums, addTrackNums, sortCode);
+			  }
 		  }
 		  
 		  try {
