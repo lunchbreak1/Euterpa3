@@ -35,9 +35,29 @@ public class FrameWriter {
 		}
 		catch(Exception e)
 		{
-			System.out.print("Exception from FrameWriter, couldn't set the frame data for " + pathToFile);
+			System.out.print("Exception from FrameWriter, couldn't set the sort code for " + pathToFile);
 		}
 
+	}
+	
+	public static void SetYear(String pathToFile, String year)
+	{
+		try
+		{
+			AudioFile f = new MP3File(pathToFile);
+			
+			Tag tag = f.getTag();
+			
+			AudioHeader header = f.getAudioHeader();
+			
+			tag.setField(FieldKey.YEAR, year);
+		
+			f.commit();
+		}
+		catch(Exception e)
+		{
+			System.out.print("Exception from FrameWriter, couldn't set the year for " + pathToFile);
+		}
 	}
 
 }

@@ -277,8 +277,9 @@ public class EuterpaClient {
 	      //Before saving anything, check if there is a song that already has that name.
 
 	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
+	        SetYear(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", year);
 	        SetSortCode(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", sortCode);
-	        
+
 	        CommandPrompt.RunCommand("del " + Globals.MUSIC_LIBRARY_PATH + "temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
 	        if (mp3file.hasId3v2Tag()) {
 	        	
@@ -398,7 +399,7 @@ public class EuterpaClient {
 	        	mp3file.setId3v2Tag(id3v2Tag);
 	        }
 
-	        if(id3v2Tag.getTrack()==null)
+	        if(addTrackNums && id3v2Tag.getTrack()==null)
 	        {
 	        	id3v2Tag.setTrack("" + trackNumber);
 	        }
@@ -410,11 +411,6 @@ public class EuterpaClient {
 			    id3v2Tag.setAlbumArtist(artist);
 	        }
 
-	        if(year.length() > 0)
-	        {
-	        	id3v2Tag.setYear(year);
-	        }
-	        
 	        String comment = "";
 	        
 	        if(company.length() > 0)
@@ -452,7 +448,8 @@ public class EuterpaClient {
 
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
-	        	SetSortCode(dir + newTrackName, sortCode);
+	        	SetYear(dir + "\\" + newTrackName, year);
+	        	SetSortCode(dir + "\\" + newTrackName, sortCode);       	
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
 	        else
@@ -476,6 +473,7 @@ public class EuterpaClient {
 	        	CommandPrompt.RunCommand("mkdir " + StringFormatter.SurroundWithQuotes(tempDir));
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(tempDir + newTrackName);
+	        	SetYear(tempDir + newTrackName, year);
 	        	SetSortCode(tempDir + newTrackName, sortCode);
 	        	
 	        	String copyCommand = "xcopy " + StringFormatter.SurroundWithQuotes(tempDir + newTrackName) + " " + StringFormatter.SurroundWithQuotes(dir);
@@ -558,38 +556,40 @@ public class EuterpaClient {
 		    	Date date = new Date(file.lastModified());
 		    }
 		  } 
-		  else {
 
-		  }
-		  
 		  for(int i = 0; i < files.length; i++)
 		  {
 			  String name = files[i].getName();
-			  
-			  if(name.contains(strToOmit))
+			  if(name.contains(strToOmit) || addTrackNums)
 			  {
 				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
 						  year, company, trimLeadingNums, addTrackNums, sortCode);
 			  }
-			  else
-			  {
-				  
-			  }
-			  
-			  try {
-				CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "//temp"), Globals.MUSIC_LIBRARY_PATH);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Couldn't remove the temp directory");
-			} 
 		  }
-	}
+		  
+		  try {
+				CommandPrompt.RunCommand("rmdir " + StringFormatter.SurroundWithQuotes(dir + "//temp"), Globals.MUSIC_LIBRARY_PATH);
+			  } catch (Exception e) 
+		  		{
+				  // TODO Auto-generated catch block
+				  System.out.println("Couldn't remove the temp directory");
+			    } 
+	 }
+	
 	
 	public static void SetSortCode(String pathToFile, String sortCode)
 	{
 		if(sortCode.length() > 0)
 		{
 			FrameWriter.SetSortCode(pathToFile, sortCode);
+		}
+	}
+	
+	public static void SetYear(String pathToFile, String year)
+	{
+		if(year.length() > 0)
+		{
+			FrameWriter.SetYear(pathToFile, year);
 		}
 	}
 	

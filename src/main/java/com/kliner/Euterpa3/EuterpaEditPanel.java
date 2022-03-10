@@ -111,9 +111,9 @@ import javax.swing.JFileChooser;
 		    removeNumbers.setBounds(590, 560, 25, 25);
 		    add(removeNumbers);
 		    
-		    addTrackNumsLbl = new JLabel("Add track numbers?");
+		    addTrackNumsLbl = new JLabel("Add track numbers and change all tracks?");
 		    addTrackNumsLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-		    addTrackNumsLbl.setBounds(100, 610, 500, 40);
+		    addTrackNumsLbl.setBounds(100, 600, 500, 40);
 		    addTrackNumsLbl.setForeground(Color.white);
 		    add(addTrackNumsLbl);
 		    
