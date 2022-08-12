@@ -44,9 +44,9 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    setLayout(null);
 	    setBackground(Color.black);
 	    
-	    titleLabel = new JLabel("eUterpa");
+	    titleLabel = new JLabel("SoundsFun");
 	    titleLabel.setFont(new Font("Arial", Font.PLAIN, 24));
-	    titleLabel.setBounds(350, 30, 100, 40);
+	    titleLabel.setBounds(350, 30, 150, 40);
 	    titleLabel.setForeground(Color.white);
 	    add(titleLabel);
 	    

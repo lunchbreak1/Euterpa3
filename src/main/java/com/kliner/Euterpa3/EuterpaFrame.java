@@ -14,11 +14,11 @@ public class EuterpaFrame extends JFrame {
 	{
 		super();
 		setBounds(0,0,800,900);
-		setTitle("eUterpa");
+		setTitle("SoundsFun");
 	    
 	    EuterpaPanel createPanel = new EuterpaPanel();
 		EuterpaEditPanel editPanel = new EuterpaEditPanel();
-		EuterpaDeletePanel deletePanel = new EuterpaDeletePanel();
+		//EuterpaDeletePanel deletePanel = new EuterpaDeletePanel();
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -28,7 +28,7 @@ public class EuterpaFrame extends JFrame {
 	    tp.setBounds(0,0, 800, 950);  
 	    tp.add("Create a Playlist",createPanel);  
 	    tp.add("Edit a Playlist",editPanel);  
-	    tp.add("Delete a Playlist",deletePanel); 
+	    //tp.add("Delete a Playlist",deletePanel); 
 
 	    add(tp);  
 	    setSize(800,900);  
