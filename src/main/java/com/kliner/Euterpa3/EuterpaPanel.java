@@ -23,8 +23,10 @@ public class EuterpaPanel extends JPanel implements ActionListener
 {
 	//String MP3folder = "D:\\Music\\";
 	String MP3folder = Globals.MUSIC_LIBRARY_PATH;
-	JLabel titleLabel, pageLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeCharsLbl, trimCharsLbl, removeNumsLbl;
-	JTextField ostValue, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, sortCodeVal, removeChars, trimChars;
+	JLabel titleLabel, pageLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, 
+	mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeCharsLbl, trimCharsLbl, removeNumsLbl;
+	JTextField ostValue, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, 
+	sortCodeVal, removeChars, trimChars;
 	JTextArea timestamps;
 	JScrollPane sp;
 	JButton selectOST, selectArt, submit;
@@ -39,7 +41,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	public EuterpaPanel()
 	{
 		super();
-		setSize(800,650);
+		setSize(800,1000);
 	    setVisible(true);
 	    setLayout(null);
 	    setBackground(Color.black);
@@ -139,16 +141,6 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    directorVal.setFont(new Font("Arial", Font.PLAIN, 24));
 	    add(directorVal);
 	    
-//	    mediumLbl = new JLabel("Medium");
-//	    mediumLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-//	    mediumLbl.setBounds(100, 600, 100, 40);
-//	    add(mediumLbl);
-//	    
-//	    mediumVal = new JTextField();
-//	    mediumVal.setBounds(200, 600, 400, 35);
-//	    mediumVal.setFont(new Font("Arial", Font.PLAIN, 24));
-//	    add(mediumVal);
-
 	    companyLbl = new JLabel("Studio");
 	    companyLbl.setFont(new Font("Arial", Font.PLAIN, 24));
 	    companyLbl.setBounds(100, 650, 150, 40);
@@ -171,20 +163,31 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	    yearVal.setFont(new Font("Arial", Font.PLAIN, 24));
 	    add(yearVal);
 	    
+	    mediumLbl = new JLabel("Medium");
+	    mediumLbl.setFont(new Font("Arial", Font.PLAIN, 24));
+	    mediumLbl.setBounds(80, 750, 120, 40);
+	    mediumLbl.setForeground(Color.white);
+	    add(mediumLbl);
+	    
+	    mediumVal = new JTextField();
+	    mediumVal.setBounds(200, 750, 400, 35);
+	    mediumVal.setFont(new Font("Arial", Font.PLAIN, 24));
+	    add(mediumVal);
+	    
 	    sortCodeLbl = new JLabel("Sort Code");
 	    sortCodeLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-	    sortCodeLbl.setBounds(80, 750, 120, 40);
+	    sortCodeLbl.setBounds(80, 800, 120, 40);
 	    sortCodeLbl.setForeground(Color.white); 
 	    add(sortCodeLbl);
 	    
 	    sortCodeVal = new JTextField();
-	    sortCodeVal.setBounds(200, 750, 400, 35);
+	    sortCodeVal.setBounds(200, 800, 400, 35);
 	    sortCodeVal.setFont(new Font("Arial", Font.PLAIN, 24));
 	    add(sortCodeVal);
 
 	    submit = new JButton("Create Playlist"); 
 	    submit.addActionListener(this); 
-	    submit.setBounds(300, 800, 175, 35);
+	    submit.setBounds(300, 850, 175, 35);
 	    add(submit);
 	} 
 	

@@ -25,8 +25,10 @@ import javax.swing.JFileChooser;
 
 		//String MP3folder = "D:\\Music\\";
 		String MP3folder = Globals.MUSIC_LIBRARY_PATH;
-		JLabel titleLabel, pageLbl, omitStringLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeNumsLbl, addTrackNumsLbl;
-		JTextField ostValue, omitStringVal, seriesVal, artistVal, directorVal, mediumVal, companyVal, yearVal, artVal, sortCodeVal;
+		JLabel titleLabel, pageLbl, omitStringLbl, timestampsLbl, seriesLbl, artistLbl, directorLbl, 
+		mediumLbl, companyLbl, yearLbl, artLbl, sortCodeLbl, removeNumsLbl, addTrackNumsLbl;
+		JTextField ostValue, omitStringVal, seriesVal, artistVal, directorVal, 
+		mediumVal, companyVal, yearVal, artVal, sortCodeVal;
 		JTextArea timestamps;
 		JScrollPane sp;
 		JButton selectOST, selectArt, submit;
@@ -38,7 +40,7 @@ import javax.swing.JFileChooser;
 		public EuterpaEditPanel()
 		{
 			super();
-			setSize(800,750);
+			setSize(800,1000);
 		    setVisible(true);
 		    
 		    setLayout(null);
@@ -121,25 +123,36 @@ import javax.swing.JFileChooser;
 		    addTrackNumbers.setBounds(590, 610, 25, 25);
 		    add(addTrackNumbers);
 
-		    companyLbl = new JLabel("Company");
+		    companyLbl = new JLabel("Studio");
 		    companyLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-		    companyLbl.setBounds(100, 450, 150, 40);
+		    companyLbl.setBounds(100, 400, 150, 40);
 		    companyLbl.setForeground(Color.white);
 		    add(companyLbl);
 		    
 		    companyVal = new JTextField();
-		    companyVal.setBounds(250, 450, 350, 35);
+		    companyVal.setBounds(250, 400, 350, 35);
 		    companyVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(companyVal);
 		    
 		    yearLbl = new JLabel("Year");
 		    yearLbl.setFont(new Font("Arial", Font.PLAIN, 24));
-		    yearLbl.setBounds(100, 500, 100, 40);
+		    yearLbl.setBounds(100, 450, 100, 40);
 		    yearLbl.setForeground(Color.white);
 		    add(yearLbl);
 		    
+		    mediumLbl = new JLabel("Medium");
+		    mediumLbl.setFont(new Font("Arial", Font.PLAIN, 24));
+		    mediumLbl.setBounds(80, 500, 120, 40);
+		    mediumLbl.setForeground(Color.white);
+		    add(mediumLbl);
+		    
+		    mediumVal = new JTextField();
+		    mediumVal.setBounds(200, 500, 400, 35);
+		    mediumVal.setFont(new Font("Arial", Font.PLAIN, 24));
+		    add(mediumVal);
+		    
 		    yearVal = new JTextField();
-		    yearVal.setBounds(200, 500, 400, 35);
+		    yearVal.setBounds(200, 450, 400, 35);
 		    yearVal.setFont(new Font("Arial", Font.PLAIN, 24));
 		    add(yearVal);
 		    
