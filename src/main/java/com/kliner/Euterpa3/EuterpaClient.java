@@ -277,7 +277,9 @@ public class EuterpaClient {
 	      //Before saving anything, check if there is a song that already has that name.
 
 	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
+	        
 	        SetYear(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", year);
+	        SetGenre(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", medium);
 	        SetSortCode(Globals.MUSIC_LIBRARY_PATH + album + "\\" + song + ".mp3", sortCode);
 
 	        CommandPrompt.RunCommand("del " + Globals.MUSIC_LIBRARY_PATH + "temp\\" + StringFormatter.SurroundWithQuotes(song + ".mp3"));
@@ -590,6 +592,14 @@ public class EuterpaClient {
 		if(year.length() > 0)
 		{
 			FrameWriter.SetYear(pathToFile, year);
+		}
+	}
+	
+	public static void SetGenre(String pathToFile, String genre)
+	{
+		if(genre.length() > 0)
+		{
+			FrameWriter.SetGenre(pathToFile, genre);
 		}
 	}
 	

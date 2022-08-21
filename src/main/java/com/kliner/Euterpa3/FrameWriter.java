@@ -59,5 +59,25 @@ public class FrameWriter {
 			System.out.print("Exception from FrameWriter, couldn't set the year for " + pathToFile);
 		}
 	}
+	
+	public static void SetGenre(String pathToFile, String genre)
+	{
+		try
+		{
+			AudioFile f = new MP3File(pathToFile);
+			
+			Tag tag = f.getTag();
+			
+			AudioHeader header = f.getAudioHeader();
+			
+			tag.setField(FieldKey.GENRE, genre);
+		
+			f.commit();
+		}
+		catch(Exception e)
+		{
+			System.out.print("Exception from FrameWriter, couldn't set the year for " + pathToFile);
+		}
+	}
 
 }

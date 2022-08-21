@@ -229,7 +229,7 @@ public class EuterpaPanel extends JPanel implements ActionListener
 	            EuterpaClient.run(ost, dir, 
 	    	        	timestampList, "", "", 
 	    	        	directorVal.getText(), artistVal.getText(),
-	    	        	"", 
+	    	        	mediumVal.getText(), 
 	    	        	companyVal.getText(), yearVal.getText(), sortCodeVal.getText(),
 	    	        	removeChars.getText(), trimChars.getText(),
 	    	        	removeNumbers.isSelected());
