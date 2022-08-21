@@ -60,7 +60,7 @@ public class EuterpaClient {
 	
 	//LATEST
 	public static void edit(String directory, String omitString, 
-			String artist, String director, String company, String year, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
+			String artist, String director, String company, String year, String medium, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		//read folder for mp3 files
 		//get a list of timestamps
@@ -68,7 +68,7 @@ public class EuterpaClient {
 		//return cut up mp3 files
 		try
 		{
-			editPlaylist(directory, omitString, artist, director, company, year, trimLeadingNums, addTrackNums, sortCode);
+			editPlaylist(directory, omitString, artist, director, company, year, medium, trimLeadingNums, addTrackNums, sortCode);
 			
 			//loop through every file in the directory and run setProperties on each mp3 file
 
@@ -271,9 +271,7 @@ public class EuterpaClient {
 	        id3v2Tag.setComment("Studio: " + company + ", Directed by: " + director);
 	       
 	        id3v2Tag.setTitle(song);
-	        
-	        
-	        
+
 	      //Before saving anything, check if there is a song that already has that name.
 
 	        SaveSongAs(mp3file,  Globals.MUSIC_LIBRARY_PATH + album + "\\" + song);
@@ -374,7 +372,7 @@ public class EuterpaClient {
 	
 	// LATEST WORKING EDIT FUNCTION
 	static void setSongProperties(String song, String dir, String toOmit, int trackNumber, String albumName, String artist, String director,   
-			 String company, String year, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
+			 String company, String year, String medium, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		String tempDir = dir + "\\temp\\";
 
@@ -451,6 +449,7 @@ public class EuterpaClient {
 	        	id3v2Tag.setTitle(newTrackName.replace(".mp3", ""));
 	        	mp3file.save(dir + "\\" + newTrackName);
 	        	SetYear(dir + "\\" + newTrackName, year);
+	        	SetGenre(dir + "\\" + newTrackName, medium);
 	        	SetSortCode(dir + "\\" + newTrackName, sortCode);       	
 	        	CommandPrompt.RunCommand("del " + StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\" + song), StringFormatter.SurroundWithQuotes(Globals.MUSIC_LIBRARY_PATH + "\\" + albumName + "\\"));
 	        }
@@ -537,7 +536,7 @@ public class EuterpaClient {
 	
 	//LATEST VERSION
 	public static void editPlaylist(String path, String strToOmit, String artist, String director,
-			String year, String company, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
+			String year, String company, String medium, boolean trimLeadingNums, boolean addTrackNums, String sortCode)
 	{
 		String album = getCurrentFolder(path);
 		
@@ -565,7 +564,7 @@ public class EuterpaClient {
 			  if(name.contains(strToOmit) || addTrackNums)
 			  {
 				  setSongProperties(name, path, strToOmit, i+1, album, artist, director, 
-						  year, company, trimLeadingNums, addTrackNums, sortCode);
+						  year, company, medium, trimLeadingNums, addTrackNums, sortCode);
 			  }
 		  }
 		  

@@ -208,7 +208,7 @@ import javax.swing.JFileChooser;
 		        	omitStringVal.getText(),
 		        	directorVal.getText(),
 		        	artistVal.getText(),
-		        	companyVal.getText(), yearVal.getText(),
+		        	companyVal.getText(), yearVal.getText(), mediumVal.getText(),
 		        	removeNumbers.isSelected(),
 		        	addTrackNumbers.isSelected(),
 		        	sortCodeVal.getText());
